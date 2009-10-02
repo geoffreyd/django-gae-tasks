@@ -55,6 +55,13 @@ class Task(BaseModel):
     # submitter = db.UserProperty()
     # assignee = db.UserProperty()
 
+class ActiveTask(BaseModel):
+    status          = db.StringProperty()
+    actor           = db.ReferenceProperty(Actor)
+    actor_type      = db.StringProperty()
+    task_assignment = db.ReferenceProperty(TaskAssignment)
+    tags            = db.TextProperty()
+
 class AliasTask(Task):
     
 class AutoTask(Task):
