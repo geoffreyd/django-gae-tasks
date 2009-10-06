@@ -50,15 +50,6 @@ class User(BaseModel):
     actor_type                  = db.StringProperty()
     preference                  = db.StringProperty()
 
-class Action(BaseModel):
-    kind       = db.StringProperty()
-    status     = db.StringProperty()
-    short_name = db.IntegerProperty() # integer? maybe code?
-    name       = db.StringProperty()
-    controller = db.StringProperty()
-    action     = db.StringProperty()
-    tags       = db.TextProperty()
-
 class AssetDeliverable(BaseModel):
     status      = db.StringProperty()
     asset       = db.ReferenceProperty(Asset)
@@ -329,3 +320,8 @@ class Transfer(BaseModel):
     state    = db.TextProperty()
     status   = db.IntegerProperty()
 
+class Vendor(BaseModel):
+    name = db.StringProperty()
+    yaml = db.TextProperty()
+    state = db.TextProperty()
+    status = db.IntegerProperty()

@@ -1,6 +1,15 @@
 from appengine_django.models import BaseModel
 from google.appengine.ext import db
 
+class Action(BaseModel):
+    kind       = db.StringProperty()
+    status     = db.StringProperty()
+    short_name = db.IntegerProperty() # integer? maybe code?
+    name       = db.StringProperty()
+    controller = db.StringProperty()
+    action     = db.StringProperty()
+    tags       = db.TextProperty()
+
 class Project(BaseModel):
     name = db.StringProperty()
     client = db.ReferenceProperty(Client)

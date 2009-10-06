@@ -33,9 +33,3 @@ class Employee(Person):
 
 class Manager(Employee):
     
-
-class Vendor(BaseModel):
-    name = db.StringProperty()
-    yaml = db.TextProperty()
-    state = db.TextProperty()
-    status = db.IntegerProperty()
