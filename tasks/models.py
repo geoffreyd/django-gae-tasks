@@ -139,3 +139,4 @@ class TaskRequirement(BaseModel):
     yaml        = db.TextProperty()
     state       = db.TextProperty()
     status      = db.IntegerProperty()
+

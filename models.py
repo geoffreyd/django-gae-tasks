@@ -125,6 +125,26 @@ class BillableRole(BaseModel):
     role          = db.IntegerProperty()
     tags          = db.StringListProperty()
 
+class Billing(BaseModel):
+    """docstring for Billing"""
+    status        = db.IntegerProperty()
+    rate          = db.IntegerProperty() #should be Decimal
+    created_on    = db.DateTimeProperty()
+    billable      = db.ReferenceProperty(BaseModel) # or String?
+    billable_type = db.StringProperty()
+    creator       = db.ReferenceProperty(Actor)
+    creator_type  = db.StringProperty()
+    role          = db.ReferenceProperty(Role)
+    tags          = db.StringListProperty()
+
+class BuildDeliverable(BaseModel):
+    """docstring for BuildDeliverable"""
+    status       = db.IntegerProperty()
+    build        = db.StringProperty()
+    build_type   = db.StringProperty()
+    deliverable  = db.ReferenceProperty(Deliverable)
+    tags         = db.StringListProperty()
+
 class Deliverable(BaseModel):
     name = db.StringProperty()
     due_date = db.DateTimeProperty()
@@ -132,23 +152,102 @@ class Deliverable(BaseModel):
     json = db.TextProperty()
     state = db.TextProperty()
     status = db.IntegerProperty()
+    project = db.ReferenceProperty(Project)
+    notes = db.TextProperty()
+    tages = db.StringListProperty()
+
+class Departments(BaseModel):
+    """ ... """
+    status = db.IntegerProperty()
+    name   = db.StringProperty()
+    tags   = db.StringListProperty()
+
+class ElementAsset(BaseModel):
+    status       = db.StringProperty()
+    asset        = db.ReferenceProperty(Asset)
+    element_key  = db.StringProperty()
+    element_type = db.StringProperty()
+    tags         = db.StringListProperty()
+
+class EntryMapping(BaseModel):
+    """ ... """
+    kind            = db.StringProperty('type')
+    position        = db.IntegerProperty()
+    source_position = db.IntegerProperty()
+    entry_type      = db.StringProperty()
+    task            = db.ReferenceProperty(Task)
+    tags            = db.StringListProperty()
+
+class EventAuthorization(BaseModel):
+    """ ... """
+    status        = db.IntegerProperty()
+    event         = db.ReferenceProperty(Event)
+    authorization = db.ReferenceProperty(Authorization)
+    tags          = db.StringListProperty()
 
 class Event(BaseModel):
-    created_on = db.DateTimeProperty()
-    name = db.StringProperty()
-    securable = db.ReferenceProperty(Secure) 
-    securable_type = db.StringProperty()
+    created_on      = db.DateTimeProperty()
+    action          = db.ReferenceProperty(Action)
+    actor_key       = db.StringProperty()
+    actor_type      = db.StringProperty()
+    name            = db.StringProperty()
+    securable       = db.ReferenceProperty(Secure) 
+    securable_type  = db.StringProperty()
     securable_state = db.TextProperty()
-    task = db.ReferenceProperty(Task)
+    task            = db.ReferenceProperty(Task)
+
+class Executable(BaseModel):
+    """ ... """
+    kind              = db.StringProperty('type')
+    name              = db.StringProperty()
+    status            = db.IntegerProperty()
+    host              = db.StringProperty()
+    login             = db.StringProperty()
+    password          = db.StringProperty()
+    path              = db.StringProperty()
+    queue_min_size    = db.IntegerProperty()
+    queue_min_entries = db.IntegerProperty()
+    tags              = db.StringListProperty()
 
 class Issue(BaseModel):
-    analysis    = db.TextProperty()
-    name        = db.StringProperty()
-    severity    = db.IntegerProperty()
-    status      = db.IntegerProperty()
-    kind        = db.StringProperty('type')
+    """ ... """
+    kind         = db.StringProperty('type')
+    status       = db.IntegerProperty()
+    short_name   = db.StringProperty()
+    name         = db.StringProperty()
+    severity     = db.IntegerProperty()
+    created_on   = db.DateTimeProperty()
+    creator_key  = db.StringProperty()
+    creator_type = db.StringProperty()
+    element_key  = db.StringProperty()
     element_type = db.StringProperty()
-    element_id  = db.IntegerProperty()
+    analysis     = db.TextProperty()
+    tags         = db.StringListProperty()
+
+class MailRecipient(BaseModel):
+    """ ... """
+    kind           = db.StringProperty('type')
+    status         = db.IntegerProperty()
+    pending_mail   = db.ReferenceProperty(PendingMail)
+    recipient_key  = db.StringProperty()
+    recipient_type = db.StringProperty()
+    tags           = db.StringListProperty()
+
+class PendingMail(BaseModel):
+    """ ... """
+    kind              = db.StringProperty('type')
+    status            = db.IntegerProperty()
+    error_code        = db.IntegerProperty()
+    error_message     = db.StringProperty()
+    error_type        = db.IntegerProperty()
+    mailer_template   = db.StringProperty()
+    mailer_type       = db.StringProperty()
+    qmail_queue_inode = db.IntegerProperty()
+    mailable_key      = db.StringProperty()
+    mailable_type     = db.StringProperty()
+    sender_key        = db.StringProperty()
+    sender_type       = db.StringProperty()
+    tags              = db.StringListProperty()
 
 class PurchaseOrderApplication(BaseModel):
     purchase_order    = db.ReferenceProperty(PurchaseOrder)
