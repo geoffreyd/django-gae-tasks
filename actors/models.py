@@ -14,13 +14,17 @@ class Client(BaseModel):
     tags              = db.StringListProperty()
     
 class Person(BaseModel):
-    name = db.StringProperty()
-    email = db.EmailProperty()
+    kind               = db.StringProperty('type')
+    parent             = db.SelfReferenceProperty()
+    children_count     = db.IntegerProperty()
+    name               = db.StringProperty()
+    email              = db.EmailProperty()
     on_private_network = db.BooleanProperty()
-    yaml = db.TextProperty()
-    state = db.TextProperty()
-    status = db.IntegerProperty()
-    type = db.StringProperty()
+    queue_min_size     = db.IntegerProperty()
+    queue_min_entries  = db.IntegerProperty()
+    yaml               = db.TextProperty()
+    state              = db.TextProperty()
+    status             = db.IntegerProperty()
     
 class Contact(Person):
     

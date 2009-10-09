@@ -53,7 +53,9 @@ class Task(BaseModel):
     task_status = db.IntegerProperty()
     estimated_time_input = db.StringProperty()
     created_by = db.ReferenceProperty(User) # probably Auth.User or something
-    type = db.StringProperty()
+    kind = db.StringProperty('type')
+    is_prototype = db.BooleanProperty()
+    is_workflow = db.BooleanProperty()
     # project = db.ReferenceProperty(Project, collection_name='tasks')
     # task_type = db.StringProperty()
     # priority = db.StringProperty()
