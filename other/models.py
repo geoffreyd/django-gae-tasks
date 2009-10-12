@@ -1,4 +1,4 @@
-# /models
+# other/models.py
 from appengine_django.models import BaseModel
 from google.appengine.ext import db
 
